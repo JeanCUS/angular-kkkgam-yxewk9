@@ -1,0 +1,70 @@
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-60">
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-0" style="width:25%;">
+              <div class="divider d-flex align-items-center my-4">
+                <p class="text-center fw-bold mx-3 mb-0" style="font-family: 'BIZ UDGothic', sans-serif; 
+                font-family: 'Patrick Hand', cursive; font-size:x-large">Inicio de sesión</p>
+            </div>
+            <form [formGroup]="loginForm">
+                
+                <div class="form-outline mb-4">
+  
+                    <input style="background-color:2B4F69; color:white;" type="email" id="form3Example3" class="form-control form-control-lg"
+                    formControlName="email" placeholder="Ingrese su correo electrónico " />
+  
+                </div>
+  
+                
+                <div class="form-outline mb-3">
+                    <div class="input-group mb-3">
+                        <input style="background-color:#2B4F69;color:white;" [type]="passLock? 'password' : 'text'" id="inputPasswordLogin" class="form-control form-control-lg"
+                        formControlName="password" placeholder="Ingrese su contraseña" />
+                        <button (click)="buttonVPass()" class="btn btn-outline-secondary" style="border-color:#fffff1; background-color:2B4F69; " type="button" id="buttonValidPass">
+                            <i *ngIf="passLock===true" class="fa-solid fa-lock" style="color:#ffffff;"></i>
+                            <i *ngIf="passLock===false" class="fa-solid fa-lock-open" style="color:#ffffff;"></i>
+                        </button>
+                    </div>
+                </div>
+  
+                
+                <div class="text-center text-lg-center mt-4 pt-2">
+                    <button (click)="loginWithEmail()" type="button" class="btn btn-primary btn-lg"
+                        style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                        style="font-family: 'BIZ UDGothic', sans-serif; 
+                        font-family: 'Patrick Hand', cursive; background-color:#6A2121;border-color: #6A2121;">Iniciar sesión <i class="fa-solid fa-user-plus" style="color:#ffffff;"></i></button>
+                        
+                </div>
+                <div class="text-center text-lg-center mt-1 pt-2">
+                  <button (click)="loginWithEmail()" type="button" class="btn btn-primary btn-lg"
+                      style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                      style="font-family: 'BIZ UDGothic', sans-serif; 
+                      font-family: 'Patrick Hand', cursive; background-color:#6A2121;border-color: #6A2121;">Olvidé mi contraseña <i class="fa-solid fa-user-plus" style="color:#ffffff;"></i></button>
+                      
+              </div>
+                <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0">Ó</p>
+                </div>
+                <div
+                    class="d-flex flex-row align-items-center justify-content-center justify-content-lg-center mt-4">
+                    <button  type="button" style="background-color:#1F4492"
+                        class="btn btn-primary btn-floating mx-1">
+                        <i class="fab fa-facebook-f" style="color:white;"></i>
+                    </button>
+  
+                    <button  type="button" style="background-color:#DC3332;border-color: #DC3332;"
+                        class="btn btn-primary btn-floating mx-1">
+                        <i class="fab fa-google" style="color:white;" ></i>
+                    </button>
+  
+                    
+                </div>
+  
+                <p class="small fw-bold mt-2 pt-1 mb-0">¿No tienes cuenta? <a routerLink="/Registrar-Usuario"
+                        class="link-danger">Registrarse</a></p>
+              </form>
+          </div>
+      </div>
+  </div>
+
+</section>

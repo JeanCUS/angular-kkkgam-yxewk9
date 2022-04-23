@@ -1,0 +1,48 @@
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+.miPerfilDescripcion{
+    text-align: center;
+
+}
+
+.card{
+    border-radius: 25%;
+    border-color: #eeeeee;
+    text-align: center;
+    
+}
+
+.card-body{
+    background-color: #fffff1;
+    border-radius: 25%;
+    border-color: black;
+    
+}
+
+.letrita {
+    font-family: 'BIZ UDGothic' sans-serif, 'Patrick Hand', cursive;
+    font-size: large;
+    
+}
+
+.inputcito{
+    background-color:#fffff1; 
+    border-color:#fffff1; 
+    
+}
