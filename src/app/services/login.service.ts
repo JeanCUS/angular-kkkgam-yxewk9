@@ -17,13 +17,13 @@ export class LoginService {
    return addDoc(usuariosRef, usuario);
  }
 
- getEmpleados(): Observable<userInterface[]> {
-   const empleados = collection(this.firestore, 'usuariosI');
-   return collectionData(empleados, { idField: 'idj' }) as Observable<userInterface[]>
+ getUsuarios(): Observable<userInterface[]> {
+   const usuarios = collection(this.firestore, 'usuariosI');
+   return collectionData(usuarios, { idField: 'idj' }) as Observable<userInterface[]>
  }
 
  getEmpleado(idj: string):Observable<any[]>{
-  const bookRef = doc(this.firestore, 'empleados/'+idj);
+  const bookRef = doc(this.firestore, 'usuariosI/'+idj);
   return docData(bookRef, { idField: 'idj' }) as Observable<any>;
 }
 
@@ -44,9 +44,9 @@ export class LoginService {
    // ...
  }
 
- eliminarEmpleado(id: string): Promise<any> {
-  const empleadoRef = doc(this.firestore, 'empleados/' + id);
-  return deleteDoc(empleadoRef);
+ eliminarUsuario(id: string): Promise<any> {
+  const usuarioRef = doc(this.firestore, 'usuariosI/' + id);
+  return deleteDoc(usuarioRef);
 }
 
  getEmpresa(correo: string):Observable<any[]>{

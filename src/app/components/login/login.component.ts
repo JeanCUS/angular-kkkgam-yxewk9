@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginInterface } from 'src/app/loginInterface.model';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private _serviceAuth: AuthService,) {
+    private _serviceAuth: AuthService,
+    private toastr: ToastrService) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -45,5 +47,10 @@ export class LoginComponent implements OnInit {
     this._serviceAuth.emailLogin(usuario.correo, usuario.contra).then(() => {
       this.router.navigate(['/home']);
     })
+  }
+
+  loginWithGoogle(){
+    this._serviceAuth.signInWithGoogle().then();
+    
   }
 }

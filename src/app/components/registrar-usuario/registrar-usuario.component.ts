@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { userInterface } from 'src/app/userInterface.model';
-import { loginInterface } from 'src/app/loginInterface.model';
 import { Auth } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/services/login.service';
@@ -53,14 +52,16 @@ export class RegistrarUsuarioComponent implements OnInit {
         })
       }).catch(err => {
         if (err.message == 'Firebase: Error (auth/invalid-email).') {
+          this.loading = false;
           this.toastr.error('El correo ingresado no es válido', 'Error al registrarse', { positionClass: 'toast-bottom-right' });
         } else if (err.message == 'Firebase: Error (auth/email-already-in-use).') {
-          console.log("123")
+          this.loading = false;
           this.toastr.error('El correo ingresado ya existe', 'Error al registrarse', { positionClass: 'toast-bottom-right' });
         } else if(err.message == 'Firebase: Error (auth/missing-email).'){
+          this.loading = false;
           this.toastr.error('Por favor ingrese su correo', 'Error al registrarse', { positionClass: 'toast-bottom-right' });
-        }
-        console.log(err.message);
+        } 
+        console.log(err.message, "este es el mensaje");
 
       })
     } else {

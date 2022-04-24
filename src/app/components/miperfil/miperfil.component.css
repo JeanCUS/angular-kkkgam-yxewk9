@@ -44,5 +44,5 @@
 .inputcito{
     background-color:#fffff1; 
     border-color:#fffff1; 
-    
+    max-width: max-content;
 }

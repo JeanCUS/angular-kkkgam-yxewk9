@@ -12,11 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./miperfil.component.css'],
 })
 export class MiperfilComponent implements OnInit {
-  empleados: userInterface[] = [];
-  pregunta=false;
-
-  
-  carga:FormGroup;
+  usuarios: userInterface[] = [];
+  carga:FormGroup; // nombre del formgroup usado en el html para cargar el perfil
 
   usuario: userInterface = {
     idj:'',
@@ -25,6 +22,7 @@ export class MiperfilComponent implements OnInit {
     correo: '',
     contra: '',
   };
+
   constructor(
     private _usuarioService: LoginService,
     private auth: Auth,
@@ -37,46 +35,55 @@ export class MiperfilComponent implements OnInit {
       apellidos:[''],
       correo:['']
     })
+
   }
 
   ngOnInit(): void {
-    this.getEmpleados();
+    this.getUsuarios();
     
   }
 
-  getEmpleados() {
-    this._usuarioService.getEmpleados().subscribe((res: userInterface[]) => {
-      this.empleados = res;
+  getUsuarios() {
+    this._usuarioService.getUsuarios().subscribe((res: userInterface[]) => {
+      this.usuarios = res;
       this.validLoging();
     });
   }
 
-  // eliminarEmpleado() {
-    
-  //   this._usuarioService.eliminarEmpleado(id).then(() => {
-  //     this.toastr.error('El empleado fue eliminado con éxito', 'Registro eliminado!',{
-  //       positionClass: 'toast-bottom-right'
-  //     });
-  //   }).catch(error => {
-  //     console.log('error')
-  //   });
-  // }
+  
 
   validLoging() {
     if (this.auth.currentUser !== null) {
-      for (let i = 0; i < this.empleados.length; i++) {
-        console.log(this.auth.currentUser.email," holii ",this.empleados[i].correo)
-        if(this.empleados[i].correo==this.auth.currentUser.email){
-          console.log("Enta")
+      
+      for (let i = 0; i < this.usuarios.length; i++) {
+        console.log(this.auth.currentUser.email," holii ",this.usuarios[i].correo)
+        if(this.usuarios[i].correo==this.auth.currentUser.email){
           this.carga.setValue({
-            nombre: this.empleados[i].nombre,
-            apellidos: this.empleados[i].apellidos,
-            correo: this.empleados[i].correo
+            nombre: this.usuarios[i].nombre,
+            apellidos: this.usuarios[i].apellidos,
+            correo: this.usuarios[i].correo
           })
         }
       }
     } else {
       console.log('');
+    }
+  }
+
+  eliminarUsuario() {
+    if (this.auth.currentUser !== null) {
+      for (let i = 0; i < this.usuarios.length; i++) {
+        if(this.usuarios[i].correo==this.auth.currentUser.email){
+          this._usuarioService.eliminarUsuario(this.usuarios[i].idj).then(() => {
+            this.auth.currentUser?.delete();
+            this.toastr.error('El empleado fue eliminado con éxito', 'Registro eliminado!',{
+              positionClass: 'toast-bottom-right'
+            });
+          }).catch(error => {
+            console.log('error')
+          });
+        }
+      }
     }
   }
 }
