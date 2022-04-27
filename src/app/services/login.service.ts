@@ -29,19 +29,21 @@ export class LoginService {
 
  async emailSignUp(email: string, password: string)
    : Promise<void> {
-
-   const credential = await createUserWithEmailAndPassword(
-     this.auth,
-     email,
-     password
-   );
-   await updateProfile(
-     credential.user, { displayName: credential.user.displayName }
-   );
-   // await sendEmailVerification(credential.user);
-
-   // create user in db
-   // ...
+  if(email!==null){
+    const credential = await createUserWithEmailAndPassword(
+      this.auth,
+      email,
+      password
+    );
+    await updateProfile(
+      credential.user, { displayName: credential.user.displayName }
+    );
+    // await sendEmailVerification(credential.user);
+ 
+    // create user in db
+    // ...
+  }
+   
  }
 
  eliminarUsuario(id: string): Promise<any> {

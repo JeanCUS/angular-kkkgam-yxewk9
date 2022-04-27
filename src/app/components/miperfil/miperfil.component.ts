@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./miperfil.component.css'],
 })
 export class MiperfilComponent implements OnInit {
+  // esteLabel:Label;
   usuarios: userInterface[] = [];
   carga:FormGroup; // nombre del formgroup usado en el html para cargar el perfil
-
+  verificarCorreo=true;
   usuario: userInterface = {
     idj:'',
     nombre: '',
@@ -46,27 +47,41 @@ export class MiperfilComponent implements OnInit {
   getUsuarios() {
     this._usuarioService.getUsuarios().subscribe((res: userInterface[]) => {
       this.usuarios = res;
+      // this.validarEmail();
       this.validLoging();
+      
     });
   }
-
+  validarEmail(){
+    if(this.auth.currentUser!==null){
+      if(this.auth.currentUser.emailVerified===true){
+        console.log(this.auth.currentUser.emailVerified)
+        return true
+      }
+    }
+    return false
+  }
   
 
   validLoging() {
     if (this.auth.currentUser !== null) {
-      
       for (let i = 0; i < this.usuarios.length; i++) {
-        console.log(this.auth.currentUser.email," holii ",this.usuarios[i].correo)
         if(this.usuarios[i].correo==this.auth.currentUser.email){
           this.carga.setValue({
             nombre: this.usuarios[i].nombre,
             apellidos: this.usuarios[i].apellidos,
             correo: this.usuarios[i].correo
           })
+        }else if(this.validarEmail()==true){
+          this.carga.setValue({
+            nombre: this.auth.currentUser.displayName,
+            apellidos: '',
+            correo: this.auth.currentUser.email
+          })
         }
       }
     } else {
-      console.log('');
+      console.log('No está logeado');
     }
   }
 

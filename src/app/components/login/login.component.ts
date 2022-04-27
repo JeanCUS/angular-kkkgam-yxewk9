@@ -5,13 +5,18 @@ import { Auth } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginInterface } from 'src/app/loginInterface.model';
 import { ToastrService } from 'ngx-toastr';
+import { userInterface } from 'src/app/userInterface.model';
+import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  // usuariosAuth: any[]=[];
+  // usuarioGoogle: usuarioGoogle = {}
+  usuarios: userInterface[] = [];
+  usuarioR: userInterface = { idj:'',nombre:'', apellidos: '', correo: '', contra: ''};
   passLock=true;
   loginForm:FormGroup;
 
@@ -19,7 +24,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private auth: Auth,
     private _serviceAuth: AuthService,
+    private _usuarioService: LoginService,
     private toastr: ToastrService) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -53,4 +60,30 @@ export class LoginComponent implements OnInit {
     this._serviceAuth.signInWithGoogle().then();
     
   }
+
+  getUsuarios() {
+    this._usuarioService.getUsuarios().subscribe((res: userInterface[]) => {
+      this.usuarios = res;
+      this.validLoging();
+    });
+  }
+
+  
+
+  validLoging() {
+    if (this.auth.currentUser !== null) {
+      for (let i = 0; i < this.usuarios.length; i++) {
+        if(this.usuarios[i].correo==this.auth.currentUser.email){
+          console.log("Ya existe ")
+          return
+        }
+        if((i+1)==this.usuarios.length){
+
+        }
+      }
+    } else {
+      console.log('No está logeado');
+    }
+  }
+
 }

@@ -15,14 +15,14 @@ export class RegistrarUsuarioComponent implements OnInit {
   passLock = true;
   submitted = false;
   loading= false;
+  validGugul = false;
 
-  usuario: userInterface = { idj:'',nombre:'', apellidos: '', correo: '', contra: '' };
+  usuario: userInterface = { idj:'',nombre:'', apellidos: '', correo: '', contra: ''};
   constructor(private fb: FormBuilder,private _usuarioService: LoginService, private auth: Auth,private router: Router, private toastr: ToastrService) {
     this.registerUser = this.fb.group({
       idj: [''],
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
-      
       correo: ['', Validators.required],
       contra: ['', Validators.required]
     })
@@ -40,7 +40,6 @@ export class RegistrarUsuarioComponent implements OnInit {
     }
     this.loading = true;
     if (usuario.contra.length >= 6) {
-      console.log(this.auth.currentUser)
       this._usuarioService.emailSignUp(usuario.correo, usuario.contra).then(() => {
         this._usuarioService.agregarUsuario(usuario).then(() => {
           this.loading = false;

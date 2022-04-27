@@ -14,6 +14,7 @@
                         <p class="letrita" >Nombre: <input class="inputcito" type="text" formControlName="nombre" onmousedown="return false;"> </p>
                         <p class="letrita" >Apellidos: <input class="inputcito" type="text" formControlName="apellidos" onmousedown="return false;"> </p>
                         <p class="letrita" >Correo: <input class="inputcito" type="text" formControlName="correo" onmousedown="return false;"> </p>
+                        <label id="esteLabel">xD</label>
                         
                         <!-- <p class="letrita">Apellidos: <a formControlName="apellidos"></a></p>
                         <p class="letrita">Correo: <a formControlName="correo"></a></p> -->
@@ -24,7 +25,7 @@
             <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0" style="font-family: 'BIZ UDGothic', sans-serif; 
             font-family: 'Patrick Hand', cursive; font-size:x-large"> 
-                <i  class="fa-solid fa-edit me-3" ></i>
+                <i *ngIf="validarEmail()" class="fa-solid fa-edit me-3" ></i>
                 <i (click)="eliminarUsuario()" class="fa-solid fa-trash ms-3" ></i>
             </p>
         </div>
