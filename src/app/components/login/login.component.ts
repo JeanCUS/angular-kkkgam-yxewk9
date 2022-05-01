@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
-import { Auth } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, user ,GoogleAuthProvider,signInWithPopup } from '@angular/fire/auth';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginInterface } from 'src/app/loginInterface.model';
 import { ToastrService } from 'ngx-toastr';
@@ -13,10 +14,7 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  // usuariosAuth: any[]=[];
-  // usuarioGoogle: usuarioGoogle = {}
   usuarios: userInterface[] = [];
-  usuarioR: userInterface = { idj:'',nombre:'', apellidos: '', correo: '', contra: ''};
   passLock=true;
   loginForm:FormGroup;
 
@@ -35,7 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsuarios();
   }
+
+  
 
   buttonVPass() {
     if (this.passLock === true) {
@@ -57,8 +58,23 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle(){
-    this._serviceAuth.signInWithGoogle().then();
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(this.auth,provider).then((re)=>{
     
+    for (let i = 0; i < this.usuarios.length; i++) {
+      console.log(re.user.email," será? ",this.usuarios[i].correo)
+      if(this.usuarios[i].correo==re.user.email){
+        console.log("Ya existe ")
+        return
+      }
+    }
+    // const token = provider;
+    // console.log(token)
+    // const user = re.user;
+    // console.log(user)
+    this.router.navigate(['/Home'])
+    
+    })
   }
 
   getUsuarios() {
@@ -74,7 +90,7 @@ export class LoginComponent implements OnInit {
     if (this.auth.currentUser !== null) {
       for (let i = 0; i < this.usuarios.length; i++) {
         if(this.usuarios[i].correo==this.auth.currentUser.email){
-          console.log("Ya existe ")
+          // console.log("Ya existe ")
           return
         }
         if((i+1)==this.usuarios.length){

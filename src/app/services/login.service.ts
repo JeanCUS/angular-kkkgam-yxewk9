@@ -46,8 +46,8 @@ export class LoginService {
    
  }
 
- eliminarUsuario(id: string): Promise<any> {
-  const usuarioRef = doc(this.firestore, 'usuariosI/' + id);
+ eliminarUsuario(correo: string): Promise<any> {
+  const usuarioRef = doc(this.firestore, 'usuariosI/' + correo);
   return deleteDoc(usuarioRef);
 }
 

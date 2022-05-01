@@ -89,8 +89,8 @@ export class MiperfilComponent implements OnInit {
     if (this.auth.currentUser !== null) {
       for (let i = 0; i < this.usuarios.length; i++) {
         if(this.usuarios[i].correo==this.auth.currentUser.email){
-          this._usuarioService.eliminarUsuario(this.usuarios[i].idj).then(() => {
-            this.auth.currentUser?.delete();
+          this._usuarioService.eliminarUsuario(this.usuarios[i].correo).then(() => {
+            // this.auth.currentUser?.delete();
             this.toastr.error('El empleado fue eliminado con éxito', 'Registro eliminado!',{
               positionClass: 'toast-bottom-right'
             });
@@ -98,7 +98,7 @@ export class MiperfilComponent implements OnInit {
             console.log('error')
           });
         }
-      }
+      }this.auth.currentUser?.delete();
     }
   }
 }

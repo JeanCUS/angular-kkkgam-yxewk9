@@ -6,6 +6,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { AppRoutingModule } from './app-routing.module';
+
+
 import { environment } from '../environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';

@@ -21,17 +21,18 @@ export class AuthService {
     await this.auth.signOut();
   }
   
-  async signInWithGoogle(){
+  async signInWithGoogle():Promise<void>{
 
     const provider = new GoogleAuthProvider();
     signInWithPopup(this.auth,provider).then((re)=>{
-      console.log(re);
+      // console.log(re);
       // toast.success("Inicio de sesión exitoso");
       const token = provider;
-
+      
     // The signed-in user info.
     const user = re.user;
-    console.log(user)
+    
+    // console.log(user)
     this.router.navigate(['/Home'])
     })
   }  
