@@ -1,35 +1,45 @@
 
 <section class="vh-100">
 <div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center" style="margin-top:5%">
+    <div  class="row d-flex justify-content-center align-items-center" style="margin-top:5%">
         <div class="col-xl-4">
             <div class="divider d-flex align-items-center my-4">
                 <p class="text-center fw-bold mx-3 mb-0" style="font-family: 'BIZ UDGothic', sans-serif; 
                 font-family: 'Patrick Hand', cursive; font-size:x-large">Mi perfil</p>
             </div>
             
-            <div class="card">
+            <div class="card" >
                 <div class="card-body" >
                     <div class="miPerfilDescripcion" [formGroup]="carga">
-                        <p class="letrita" >Nombre: <input class="inputcito" type="text" formControlName="nombre" onmousedown="return false;"> </p>
-                        <p class="letrita" >Apellidos: <input class="inputcito" type="text" formControlName="apellidos" onmousedown="return false;"> </p>
-                        <p class="letrita" >Correo: <input class="inputcito" type="text" formControlName="correo" onmousedown="return false;"> </p>
-                        <label id="esteLabel">xD</label>
-                        
-                        <!-- <p class="letrita">Apellidos: <a formControlName="apellidos"></a></p>
-                        <p class="letrita">Correo: <a formControlName="correo"></a></p> -->
+                        <p class="letrita" >Nombre: <input class="inputcito" id="nombre" type="text" formControlName="nombre"  onmousedown="return false"> </p>
+                        <p class="letrita" >Apellidos: <input class="inputcito" id="apellidos" type="text" formControlName="apellidos" onmousedown="return false"> </p>
+                        <p class="letrita" >Correo: <input class="inputcito" type="email" formControlName="correo" onmousedown="return false"> </p>
+                        <p class="letrita" *ngIf="editando">Contraseña: <input [type]="passLock? 'password' : 'text'" id="contra" class="inputcito"
+                            formControlName="contra" placeholder="Ingrese su contraseña" />
+                        <button (click)="buttonVPass()" class="btn btn-outline-secondary"
+                            style="border-color:#CED4DA;" type="button">
+                            <i *ngIf="passLock===true" class="fa-solid fa-lock"></i>
+                            <i *ngIf="passLock===false" class="fa-solid fa-lock-open"></i>
+                        </button></p>
                     </div>
                 </div>
             </div>
             
-            <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0" style="font-family: 'BIZ UDGothic', sans-serif; 
-            font-family: 'Patrick Hand', cursive; font-size:x-large"> 
-                <i *ngIf="validarEmail()" class="fa-solid fa-edit me-3" ></i>
-                <i (click)="eliminarUsuario()" class="fa-solid fa-trash ms-3" ></i>
-            </p>
-        </div>
-                
+            <div  class="divider d-flex align-items-center my-4">
+                <p class="text-center fw-bold mx-3 mb-0" style="font-family: 'BIZ UDGothic', sans-serif; 
+                font-family: 'Patrick Hand', cursive; font-size:x-large"> 
+                    <i (click)="cambiarEditorTrue()" class="fa-solid fa-edit me-3" ></i>
+                    <i (click)="eliminarUsuario()" class="fa-solid fa-trash ms-3" ></i>
+                </p>
+            </div>
+
+            <div class="divider2 d-flex align-items-center my-4">
+                <button *ngIf="editando" style="background-color:#616161; border-radius:10%;" (click)="editarEmpleado()">Confirmar</button>
+            </div>
+
+            <div class="divider2 d-flex align-items-center my-4">
+                <button style="background-color:#616161; border-radius:10%;" routerLink="/Agregar-Producto">Agregar Producto</button>
+            </div>
         </div>
     </div>
 </div>  

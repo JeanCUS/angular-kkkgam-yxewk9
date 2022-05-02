@@ -20,7 +20,6 @@ export class RegistrarUsuarioComponent implements OnInit {
   usuario: userInterface = { idj:'',nombre:'', apellidos: '', correo: '', contra: ''};
   constructor(private fb: FormBuilder,private _usuarioService: LoginService, private auth: Auth,private router: Router, private toastr: ToastrService) {
     this.registerUser = this.fb.group({
-      // idj: [''],
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       correo: ['', Validators.required],
@@ -30,9 +29,11 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  
   agregarUsuario() {
     const usuario: userInterface = {
-      idj: '',
+      idj:'',
       nombre: this.registerUser.value.nombre,
       apellidos: this.registerUser.value.apellidos,
       correo: this.registerUser.value.correo.toLowerCase(),

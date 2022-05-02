@@ -13,18 +13,21 @@ import { environment } from '../environments/environment';
 
 import { ToastrModule } from 'ngx-toastr';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
+
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 import {provideAuth,getAuth } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegistrarUsuarioComponent } from './components/registrar-usuario/registrar-usuario.component';
 import { HomeComponent } from './components/home/home.component';
 import { MiperfilComponent } from './components/miperfil/miperfil.component';
+import { AgregarProductoComponent } from './components/agregar-producto/agregar-producto.component';
 
 
 
@@ -46,7 +49,8 @@ import { MiperfilComponent } from './components/miperfil/miperfil.component';
     NavbarComponent,
     RegistrarUsuarioComponent,
     HomeComponent,
-    MiperfilComponent
+    MiperfilComponent,
+    AgregarProductoComponent
   ],
   bootstrap: [
     AppComponent
